@@ -111,6 +111,9 @@
 
 - (CGPoint)originForRow:(NSInteger)row column:(NSInteger)column
 {
+    NSAssert(self.rowsExact.count > row, @"You are trying to place a subview in a row that doesn't exist");
+    NSAssert(self.columnsExact.count > column, @"You are trying to place a subview in a column that doesn't exist");
+    
     CGFloat originX = 0;
     CGFloat originY = 0;
     
@@ -129,13 +132,18 @@
              rowSpan:(NSInteger)rowSpan
           columnSpan:(NSInteger)columnSpan
 {
+    NSAssert(self.rowsExact.count > row, @"You are trying to place a subview in a row that doesn't exist");
+    NSAssert(self.columnsExact.count > column, @"You are trying to place a subview in a column that doesn't exist");
+    
     CGFloat sizeX = 0;
     for (NSInteger i = column; i < column + MAX(1, columnSpan); i++) {
+        NSAssert(self.columnsExact.count > column + MAX(1, columnSpan), @"The column span you have specified exceeds the number of columns");
         sizeX += [self.columnsExact[i] floatValue];
     }
     
     CGFloat sizeY = 0;
     for (NSInteger i = row; i < row + MAX(1, rowSpan); i++) {
+        NSAssert(self.rowsExact.count > row + MAX(1, rowSpan), @"The row span you have specified exceeds the number of rows");
         sizeY += [self.rowsExact[i] floatValue];
     }
     
