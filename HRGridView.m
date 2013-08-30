@@ -96,7 +96,8 @@
     
     for (UIView *subview in self.subviews) {
         CGPoint cellOrigin = [self originForRow:subview.row column:subview.column];
-        CGSize cellSize = [self sizeForRow:subview.row column:subview.column rowSpan:subview.rowSpan columnSpan:subview.columnSpan];
+        CGSize cellSize = [self sizeForRow:subview.row column:subview.column
+                                   rowSpan:subview.rowSpan columnSpan:subview.columnSpan];
         UIEdgeInsets margin = subview.margin;
         subview.frame = CGRectMake(cellOrigin.x + margin.left,
                                    cellOrigin.y + margin.top,
