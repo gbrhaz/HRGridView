@@ -19,4 +19,16 @@
     return value;
 }
 
+- (NSArray*)itemsOfClass:(Class)theClass
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (id value in self) {
+        if ([value isKindOfClass:theClass]) {
+            [array addObject:value];
+        }
+    }
+    
+    return array;
+}
+
 @end

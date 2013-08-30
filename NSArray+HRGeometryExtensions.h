@@ -11,5 +11,6 @@
 @interface NSArray (HRGeometryExtensions)
 
 - (double)sum;
+- (NSArray*)itemsOfClass:(Class)theClass;
 
 @end
