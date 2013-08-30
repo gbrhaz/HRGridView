@@ -10,7 +10,7 @@
 
 @implementation NSArray (HRGeometryExtensions)
 
--(double)sum
+-(double)hr_sum
 {
     double value = 0;
     for (NSNumber *number in self) {
@@ -19,7 +19,7 @@
     return value;
 }
 
-- (NSArray*)itemsOfClass:(Class)theClass
+- (NSArray*)hr_itemsOfClass:(Class)theClass
 {
     NSMutableArray *array = [NSMutableArray array];
     for (id value in self) {

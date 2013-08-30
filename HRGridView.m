@@ -45,10 +45,10 @@
     CGFloat currentWidthRemaining = CGRectGetWidth(self.frame);
     CGFloat currentHeightRemaining = CGRectGetHeight(self.frame);
     
-    for (id value in [self.columnsExact itemsOfClass:[NSNumber class]]) {
+    for (id value in [self.columnsExact hr_itemsOfClass:[NSNumber class]]) {
         currentWidthRemaining -= [value floatValue];
     }
-    for (id value in [self.rowsExact itemsOfClass:[NSNumber class]]) {
+    for (id value in [self.rowsExact hr_itemsOfClass:[NSNumber class]]) {
         currentHeightRemaining -= [value floatValue];
     }
     
@@ -75,7 +75,7 @@
 
 - (NSMutableArray*)convertStarRatios:(NSArray*)ratios usingExactValues:(NSArray*)exactValues withRemainingSpace:(CGFloat)space
 {
-    double ratioSum = [ratios sum];
+    double ratioSum = [ratios hr_sum];
     CGFloat columnBase = space / ratioSum;
     NSMutableArray *exactValuesCopy = [NSMutableArray arrayWithArray:exactValues];
     
@@ -165,7 +165,7 @@
 
 - (NSArray*)starValuesForRowOrColumn:(NSArray*)array
 {
-    NSArray *strings = [array itemsOfClass:[NSString class]];
+    NSArray *strings = [array hr_itemsOfClass:[NSString class]];
     NSMutableArray *values = [NSMutableArray array];
     
     for (id value in strings) {

@@ -10,7 +10,7 @@
 
 @interface NSArray (HRGeometryExtensions)
 
-- (double)sum;
-- (NSArray*)itemsOfClass:(Class)theClass;
+- (double)hr_sum;
+- (NSArray*)hr_itemsOfClass:(Class)theClass;
 
 @end
