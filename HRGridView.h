@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIView+MyGeometry.h"
+
 
 @interface HRGridView : UIView
 

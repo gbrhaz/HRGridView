@@ -7,7 +7,6 @@
 //
 
 #import "HRGridView.h"
-#import "UIView+MyGeometry.h"
 #import "NSArray+HRGeometryExtensions.h"
 
 @interface HRGridView()
@@ -150,13 +149,13 @@
     
     CGFloat sizeX = 0;
     for (NSInteger i = column; i < column + MAX(1, columnSpan); i++) {
-        NSAssert(self.columnsExact.count > column + columnSpan, @"The column span you have specified exceeds the number of columns");
+        NSAssert(self.columnsExact.count >= column + columnSpan, @"The column span you have specified exceeds the number of columns");
         sizeX += [self.columnsExact[i] floatValue];
     }
     
     CGFloat sizeY = 0;
     for (NSInteger i = row; i < row + MAX(1, rowSpan); i++) {
-        NSAssert(self.rowsExact.count > row + rowSpan, @"The row span you have specified exceeds the number of rows");
+        NSAssert(self.rowsExact.count >= row + rowSpan, @"The row span you have specified exceeds the number of rows");
         sizeY += [self.rowsExact[i] floatValue];
     }
     
