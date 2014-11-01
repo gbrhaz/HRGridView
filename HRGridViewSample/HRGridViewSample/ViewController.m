@@ -11,7 +11,7 @@
 
 @interface ViewController ()
 
-@property (nonatomic, strong) HRGridView *gridView;
+//@property (nonatomic, strong) HRGridView *gridView;
 
 @end
 
@@ -20,9 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.gridView = [[HRGridView alloc] initWithFrame:self.view.bounds];
-    self.gridView.columns = @[@"*", @100, @75];
-    self.gridView.rows = @[@"*", @100, @200];
+    /*self.gridView = [[HRGridView alloc] initWithFrame:self.view.bounds];
+    self.gridView.columns = @[@"*", @"*", @"*"];
+    self.gridView.rows = @[@"*", @"*", @"*"];
     
     UIView *viewTopLeft = [UIView new];
     viewTopLeft.column = 0;
@@ -62,8 +62,26 @@
     viewBottomLeft.backgroundColor = [UIColor yellowColor];
     [self.gridView addSubview:viewBottomLeft];
     
-    [self.view addSubview:self.gridView];
+    [self.view addSubview:self.gridView];*/
     
+    HRLinearLayoutView *linearLayoutView = [[HRLinearLayoutView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150) layoutDirection:HRLinearLayoutHorizontal];
+    
+    UIView *v1 = [UIView new];
+    v1.backgroundColor = [UIColor blueColor];
+    v1.margin = UIEdgeInsetsMake(5, 5, 5, 5);
+    [linearLayoutView addSubview:v1];
+    
+    UIView *v2 = [UIView new];
+    v2.backgroundColor = [UIColor yellowColor];
+    v2.margin = UIEdgeInsetsMake(5, 0, 5, 0);
+    [linearLayoutView addSubview:v2];
+    
+    UIView *v3 = [UIView new];
+    v3.backgroundColor = [UIColor greenColor];
+    v3.margin = UIEdgeInsetsMake(5, 5, 5, 5);
+    [linearLayoutView addSubview:v3];
+    
+    [self.view addSubview:linearLayoutView];
 }
 
 @end

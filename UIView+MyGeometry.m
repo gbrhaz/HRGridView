@@ -9,23 +9,17 @@
 #import "UIView+MyGeometry.h"
 #import <objc/runtime.h>
 
-static char marginKey;
-static char rowKey;
-static char rowSpanKey;
-static char columnKey;
-static char columnSpanKey;
-
 @implementation UIView (MyGeometry)
 
 -(void)setMargin:(UIEdgeInsets)margin
 {
-    objc_setAssociatedObject(self, &marginKey, [NSValue valueWithUIEdgeInsets:margin], OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(margin), [NSValue valueWithUIEdgeInsets:margin], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIEdgeInsets)margin
 {
     UIEdgeInsets returnValue = UIEdgeInsetsMake(0, 0, 0, 0);
-    NSValue *val = objc_getAssociatedObject(self, &marginKey);
+    NSValue *val = objc_getAssociatedObject(self, @selector(margin));
     if (val) {
         [val getValue:&returnValue];
     }
@@ -35,45 +29,45 @@ static char columnSpanKey;
 
 - (void)setRow:(NSInteger)row
 {
-    objc_setAssociatedObject(self, &rowKey, @(row), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(row), @(row), OBJC_ASSOCIATION_ASSIGN);
 }
 
 -(NSInteger)row
 {
-    NSNumber *val = objc_getAssociatedObject(self, &rowKey);
+    NSNumber *val = objc_getAssociatedObject(self, @selector(row));
     return [val integerValue];
 }
 
 -(void)setColumn:(NSInteger)column
 {
-    objc_setAssociatedObject(self, &columnKey, @(column), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(column), @(column), OBJC_ASSOCIATION_ASSIGN);
 }
 
 -(NSInteger)column
 {
-    NSNumber *val = objc_getAssociatedObject(self, &columnKey);
+    NSNumber *val = objc_getAssociatedObject(self, @selector(column));
     return [val integerValue];
 }
 
 -(void)setRowSpan:(NSInteger)rowSpan
 {
-    objc_setAssociatedObject(self, &rowSpanKey, @(rowSpan), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(rowSpan), @(rowSpan), OBJC_ASSOCIATION_ASSIGN);
 }
 
 -(NSInteger)rowSpan
 {
-    NSNumber *val = objc_getAssociatedObject(self, &rowSpanKey);
+    NSNumber *val = objc_getAssociatedObject(self, @selector(rowSpan));
     return [val integerValue];
 }
 
 -(void)setColumnSpan:(NSInteger)columnSpan
 {
-    objc_setAssociatedObject(self, &columnSpanKey, @(columnSpan), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(columnSpan), @(columnSpan), OBJC_ASSOCIATION_ASSIGN);
 }
 
 -(NSInteger)columnSpan
 {
-    NSNumber *val = objc_getAssociatedObject(self, &columnSpanKey);
+    NSNumber *val = objc_getAssociatedObject(self, @selector(columnSpan));
     return [val integerValue];
 }
 

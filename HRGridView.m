@@ -18,6 +18,29 @@
 
 @implementation HRGridView
 
+#pragma mark - Setup
+
+- (instancetype)init {
+    if (self = [super init]) {
+        [self setup];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self setup];
+    }
+    
+    return self;
+}
+
+- (void)setup {
+    self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+}
+
+#pragma mark - Overrides
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];
@@ -35,6 +58,8 @@
     }
     
 }
+
+#pragma mark - Helpers
 
 - (void)calculateColumnsAndRows
 {
@@ -70,7 +95,6 @@
     self.rowsExact = [self convertStarRatios:rowRatio usingExactValues:self.rowsExact withRemainingSpace:currentHeightRemaining];
 }
 
-#pragma mark - Helpers
 
 - (NSMutableArray*)convertStarRatios:(NSArray*)ratios usingExactValues:(NSArray*)exactValues withRemainingSpace:(CGFloat)space
 {
@@ -113,12 +137,17 @@
         if (starValue.length == 1) {
             [ratios addObject:@1];
         } else {
-            NSInteger value = [[starValue substringToIndex:starValue.length-1] integerValue];
+            NSInteger value = [self starValueRatio:starValue];
             [ratios addObject:@(value)];
         }
     }
     
     return ratios;
+}
+
+- (NSInteger)starValueRatio:(NSString *)starString {
+    NSInteger value = [[starString substringToIndex:starString.length-1] integerValue];
+    return value;
 }
 
 - (CGPoint)originForRow:(NSInteger)row column:(NSInteger)column
@@ -173,6 +202,55 @@
         }
     }
     return values;
+}
+
+@end
+
+@implementation HRLinearLayoutView
+
+- (instancetype)initWithFrame:(CGRect)frame layoutDirection:(HRLinearLayout)direction {
+    if (self = [super initWithFrame:frame]) {
+        _layoutDirection = direction;
+    }
+    return self;
+}
+
+- (void)addSubview:(UIView *)view {
+    if (self.layoutDirection == HRLinearLayoutHorizontal) {
+        NSMutableArray *columns = [self.columns mutableCopy];
+        if (!columns) {
+            columns = [NSMutableArray array];
+        }
+        [columns addObject:@"*"];
+        self.columns = columns;
+        if (!self.rows) {
+            self.rows = @[@"*"];
+        }
+    } else {
+        NSMutableArray *rows = [self.columns mutableCopy];
+        if (!rows) {
+            rows = [NSMutableArray array];
+        }
+        [rows addObject:@"*"];
+        self.rows = rows;
+        if (!self.columns) {
+            self.columns = @[@"*"];
+        }
+    }
+    [super addSubview:view];
+}
+
+- (void)layoutSubviews {
+    NSInteger column = 0;
+    NSInteger row = 0;
+    for (UIView *view in self.subviews) {
+        if (self.layoutDirection == HRLinearLayoutHorizontal) {
+            view.column = column++;
+        } else {
+            view.row = row++;
+        }
+    }
+    [super layoutSubviews];
 }
 
 @end

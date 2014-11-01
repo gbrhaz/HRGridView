@@ -16,3 +16,18 @@
 @property (nonatomic, strong) NSArray *rows;
 
 @end
+
+typedef NS_ENUM(NSInteger, HRLinearLayout) {
+    HRLinearLayoutVertical,
+    HRLinearLayoutHorizontal
+};
+
+@interface HRLinearLayoutView : HRGridView
+
+@property (nonatomic, readonly) HRLinearLayout layoutDirection;
+
+- (instancetype)initWithFrame:(CGRect)frame layoutDirection:(HRLinearLayout)direction;
+
+
+@end
+
